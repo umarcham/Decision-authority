@@ -1,0 +1,250 @@
+:root {
+    --bg-color: #000000;
+    --text-color: #ffffff;
+    --accent-color: #ff3333;
+    --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: transparent;
+    /* Changed from var(--bg-color) to transparent */
+    color: var(--text-color);
+    font-family: var(--font-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    overflow-x: hidden;
+    position: relative;
+    /* Removed gradient from body to prevent blocking video */
+}
+
+/* Fallback Gradient placed on a separate pseudo-element or container if needed. */
+html {
+    background-color: #000;
+    /* Fixes white flash on load */
+}
+
+/* Background Video & Overlay */
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: 1;
+    /* Positive z-index to sit ON TOP of the black background */
+    opacity: 1;
+    /* Restored full opacity for sharpness */
+}
+
+#video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    /* Lighter overlay to ensure text readability without killing video details */
+    background: radial-gradient(circle at center, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.6) 100%);
+    z-index: 2;
+    /* Sit on top of video */
+    pointer-events: none;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+    text-align: left;
+    position: relative;
+    z-index: 10;
+    /* Ensure content is above video */
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Typography */
+h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+p {
+    font-size: 1.5rem;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+    color: #ccc;
+}
+
+/* Buttons */
+.btn {
+    display: block;
+    width: 100%;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    background: transparent;
+    border: 2px solid var(--text-color);
+    color: var(--text-color);
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+}
+
+.btn:hover {
+    background: var(--text-color);
+    color: var(--bg-color);
+}
+
+.btn-primary {
+    background: var(--text-color);
+    color: var(--bg-color);
+    border: none;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.btn-primary:hover {
+    background: var(--accent-color);
+}
+
+/* Verdict Styles */
+.verdict-box {
+    border: 4px solid var(--text-color);
+    padding: 3rem;
+    margin-top: 2rem;
+}
+
+.verdict-title {
+    color: var(--accent-color);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 1rem;
+}
+
+.product-name {
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: 2rem;
+    line-height: 1;
+}
+
+.reason-list {
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+.reason-list li {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.reason-list li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+}
+
+.rejection-section {
+    margin-top: 4rem;
+    border-top: 1px solid #333;
+    padding-top: 2rem;
+}
+
+.rejection-title {
+    font-size: 1rem;
+    color: #666;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+}
+
+.rejected-item {
+    margin-bottom: 1.5rem;
+}
+
+.rejected-name {
+    text-decoration: line-through;
+    color: #666;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.rejected-reason {
+    color: var(--accent-color);
+    font-size: 1rem;
+    margin-top: 0.25rem;
+}
+
+/* Loading */
+.loader {
+    font-size: 2rem;
+    font-weight: bold;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.5;
+    }
+}
